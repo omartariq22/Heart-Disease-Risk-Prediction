@@ -84,7 +84,10 @@ def build_preprocessor() -> ColumnTransformer:
     nominal_pipeline = Pipeline(
         steps=[
             ("imputer", SimpleImputer(strategy="most_frequent")),
-            ("onehot", OneHotEncoder(handle_unknown="ignore", drop="if_binary")),
+            (
+                "onehot",
+                OneHotEncoder(handle_unknown="ignore", drop="if_binary", sparse_output=False),
+            ),
         ]
     )
     ordinal_pipeline = Pipeline(

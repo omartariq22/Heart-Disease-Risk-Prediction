@@ -1,0 +1,10 @@
+model,estimator,notes
+Dummy Stratified,DummyClassifier,Chance-level baseline; every real model should beat it.
+Logistic Regression,LogisticRegression,Linear baseline with balanced class weights.
+K-Nearest Neighbors,KNeighborsClassifier,Distance-based non-parametric classifier.
+Support Vector Machine,SVC,Margin-based classifier with probability estimates enabled.
+Decision Tree,DecisionTreeClassifier,Interpretable tree baseline.
+Random Forest,RandomForestClassifier,Bagged tree ensemble with balanced class weights.
+Gaussian Naive Bayes,GaussianNB,"Included for lab coverage; GaussianNB assumes continuous features, which is imperfect after one-hot encoding."
+Gradient Boosting,GradientBoostingClassifier,Scikit-learn boosted tree baseline.
+XGBoost,SklearnCompatibleXGBClassifier,Industry-standard boosted tree classifier for tabular data.

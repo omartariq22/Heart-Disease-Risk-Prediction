@@ -83,6 +83,14 @@ python -m src.model_preprocess
 
 This writes preprocessing inspection tables to `outputs/results/` and the preprocessing report to `reports/PREPROCESSING_PIPELINE_REPORT.md`.
 
+Run baseline model comparison:
+
+```powershell
+python -m src.models
+```
+
+This evaluates the candidate classifiers with stratified 5-fold cross-validation on the training split only, writes `outputs/results/cv_results.csv`, and creates `reports/BASELINE_MODEL_COMPARISON.md`.
+
 Run tests:
 
 ```powershell
