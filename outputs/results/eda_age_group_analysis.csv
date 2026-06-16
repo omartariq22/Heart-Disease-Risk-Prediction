@@ -1,0 +1,6 @@
+age_group,rows,heart_disease_cases,heart_disease_percentage
+<40,12,9,75.0
+40-49,59,40,67.8
+50-59,98,51,52.04
+60-69,63,25,39.68
+70+,9,6,66.67

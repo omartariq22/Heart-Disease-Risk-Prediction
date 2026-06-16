@@ -1,0 +1,3 @@
+split,rows,target_0_count,target_1_count,target_1_percentage
+train,241,110,131,54.36
+test,61,28,33,54.1

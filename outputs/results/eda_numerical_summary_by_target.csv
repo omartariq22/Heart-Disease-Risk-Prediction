@@ -1,0 +1,11 @@
+target,target_label,feature,mean,median,std,min,max
+0,No heart disease,age,56.455,58.0,8.004,35.0,77.0
+0,No heart disease,trestbps,134.409,130.0,19.479,100.0,200.0
+0,No heart disease,chol,252.136,249.0,50.822,131.0,409.0
+0,No heart disease,thalach,140.0,142.0,21.633,88.0,195.0
+0,No heart disease,oldpeak,1.659,1.45,1.336,0.0,6.2
+1,Heart disease present,age,52.565,52.0,9.812,29.0,76.0
+1,Heart disease present,trestbps,128.962,130.0,16.297,94.0,180.0
+1,Heart disease present,chol,237.718,233.0,44.845,126.0,394.0
+1,Heart disease present,thalach,158.527,161.0,18.718,105.0,202.0
+1,Heart disease present,oldpeak,0.577,0.2,0.807,0.0,4.2

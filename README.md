@@ -59,6 +59,14 @@ python -m src.preprocess
 
 This writes a cleaned inspection snapshot to `data/processed/heart_clean.csv`, cleaning tables to `outputs/results/`, and the cleaning report to `reports/DATA_CLEANING_REPORT.md`.
 
+Run exploratory data analysis:
+
+```powershell
+python -m src.eda
+```
+
+This creates training-only EDA result tables in `outputs/results/`, 300 dpi figures in `outputs/figures/`, and the EDA report at `reports/EXPLORATORY_DATA_ANALYSIS.md`.
+
 Run tests:
 
 ```powershell

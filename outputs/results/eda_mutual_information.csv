@@ -1,0 +1,14 @@
+feature,mutual_information
+thal,0.174561
+cp,0.160729
+ca,0.113436
+exang,0.104632
+slope,0.09073
+oldpeak,0.084925
+chol,0.0746
+thalach,0.047741
+trestbps,0.032027
+sex,0.03103
+restecg,0.021649
+fbs,0.000626
+age,0.0

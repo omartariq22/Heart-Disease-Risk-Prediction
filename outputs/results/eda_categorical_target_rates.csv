@@ -1,0 +1,24 @@
+feature,value,label,rows,heart_disease_cases,heart_disease_percentage
+sex,0.0,Female,76,55,72.37
+sex,1.0,Male,165,76,46.06
+cp,0.0,Typical angina,114,29,25.44
+cp,1.0,Atypical angina,43,35,81.4
+cp,2.0,Non-anginal pain,69,56,81.16
+cp,3.0,Asymptomatic,15,11,73.33
+fbs,0.0,Fasting blood sugar <= 120 mg/dl,207,114,55.07
+fbs,1.0,Fasting blood sugar > 120 mg/dl,34,17,50.0
+restecg,0.0,Normal,112,50,44.64
+restecg,1.0,ST-T wave abnormality,125,80,64.0
+restecg,2.0,Probable/definite left ventricular hypertrophy,4,1,25.0
+exang,0.0,No exercise-induced angina,159,112,70.44
+exang,1.0,Exercise-induced angina,82,19,23.17
+slope,0.0,Upsloping,18,7,38.89
+slope,1.0,Flat,109,37,33.94
+slope,2.0,Downsloping,114,87,76.32
+ca,0.0,0 major vessels,138,101,73.19
+ca,1.0,1 major vessel,55,19,34.55
+ca,2.0,2 major vessels,27,5,18.52
+ca,3.0,3 major vessels,17,3,17.65
+thal,1.0,Fixed defect,13,3,23.08
+thal,2.0,Normal,129,104,80.62
+thal,3.0,Reversible defect,98,23,23.47

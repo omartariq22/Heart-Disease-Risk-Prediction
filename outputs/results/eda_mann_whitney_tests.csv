@@ -1,0 +1,6 @@
+feature,mann_whitney_u,p_value,significant_at_0_05
+thalach,3648.5,0.0,True
+oldpeak,10827.5,0.0,True
+age,9066.0,0.000553,True
+chol,8520.0,0.014746,True
+trestbps,8251.0,0.051817,False
