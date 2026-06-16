@@ -1,0 +1,23 @@
+# Local implementation planning notes.
+PROJECT_IMPLEMENTATION_STEPS.local.md
+
+# Python runtime artifacts.
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual environments.
+.venv/
+venv/
+env/
+
+# Jupyter artifacts.
+.ipynb_checkpoints/
+
+# Generated data/model artifacts.
+data/processed/*.csv
+!data/processed/.gitkeep
+outputs/models/*.joblib
+outputs/models/*.pkl
+!outputs/models/.gitkeep
