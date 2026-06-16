@@ -1,0 +1,15 @@
+column,description,feature_group,expected_dtype,modeling_role,valid_values,sentinel_missing_values,labels
+age,Patient age in years.,numerical,integer,Predictor,Positive adult age in years,,
+sex,Patient sex encoded as a binary category.,binary,integer,Predictor,"0, 1",,0 = Female; 1 = Male
+cp,Chest pain type.,nominal_categorical,integer,Predictor,"0, 1, 2, 3",,0 = Typical angina; 1 = Atypical angina; 2 = Non-anginal pain; 3 = Asymptomatic
+trestbps,Resting blood pressure in mm Hg on admission.,numerical,integer,Predictor,Positive mm Hg value,,
+chol,Serum cholesterol in mg/dl.,numerical,integer,Predictor,Positive mg/dl value,,
+fbs,Whether fasting blood sugar is greater than 120 mg/dl.,binary,integer,Predictor,"0, 1",,0 = Fasting blood sugar <= 120 mg/dl; 1 = Fasting blood sugar > 120 mg/dl
+restecg,Resting electrocardiographic result.,nominal_categorical,integer,Predictor,"0, 1, 2",,0 = Normal; 1 = ST-T wave abnormality; 2 = Probable/definite left ventricular hypertrophy
+thalach,Maximum heart rate achieved.,numerical,integer,Predictor,Positive beats-per-minute value,,
+exang,Whether exercise-induced angina is present.,binary,integer,Predictor,"0, 1",,0 = No exercise-induced angina; 1 = Exercise-induced angina
+oldpeak,ST depression induced by exercise relative to rest.,numerical,float,Predictor,Non-negative continuous value,,
+slope,Slope of the peak exercise ST segment.,nominal_categorical,integer,Predictor,"0, 1, 2",,0 = Upsloping; 1 = Flat; 2 = Downsloping
+ca,Number of major vessels colored by fluoroscopy.,ordinal_count,integer,Predictor,"0, 1, 2, 3",4,0 = 0 major vessels; 1 = 1 major vessel; 2 = 2 major vessels; 3 = 3 major vessels
+thal,Thalassemia category.,nominal_categorical,integer,Predictor,"1, 2, 3",0,1 = Fixed defect; 2 = Normal; 3 = Reversible defect
+target,Binary heart disease diagnosis label.,binary,integer,Target,"0, 1",,0 = No heart disease; 1 = Heart disease present

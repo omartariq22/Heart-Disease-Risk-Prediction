@@ -1,0 +1,5 @@
+feature_group,columns,n_columns
+numerical,"age, trestbps, chol, thalach, oldpeak",5
+binary,"sex, fbs, exang, target",4
+nominal_categorical,"cp, restecg, slope, thal",4
+ordinal_count,ca,1

@@ -1,0 +1,10 @@
+column,observed_values,valid_values,sentinel_missing_values,observed_sentinel_values,unexpected_values,n_sentinel_rows,n_unexpected_rows,status
+sex,"0, 1","0, 1",,,,0,0,pass
+cp,"0, 1, 2, 3","0, 1, 2, 3",,,,0,0,pass
+fbs,"0, 1","0, 1",,,,0,0,pass
+restecg,"0, 1, 2","0, 1, 2",,,,0,0,pass
+exang,"0, 1","0, 1",,,,0,0,pass
+slope,"0, 1, 2","0, 1, 2",,,,0,0,pass
+ca,"0, 1, 2, 3, 4","0, 1, 2, 3",4,4,,5,0,sentinel_missing_detected
+thal,"0, 1, 2, 3","1, 2, 3",0,0,,2,0,sentinel_missing_detected
+target,"0, 1","0, 1",,,,0,0,pass

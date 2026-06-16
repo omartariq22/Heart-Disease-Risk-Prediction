@@ -7,39 +7,13 @@ from pathlib import Path
 
 import pandas as pd
 
+from src.schema import CATEGORICAL_COLUMNS, EXPECTED_COLUMNS, TARGET_COLUMN, TARGET_LABELS
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DATA_PATH = PROJECT_ROOT / "data" / "raw" / "heart.csv"
 RESULTS_DIR = PROJECT_ROOT / "outputs" / "results"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 INITIAL_AUDIT_REPORT_PATH = REPORTS_DIR / "INITIAL_DATA_AUDIT.md"
-
-TARGET_COLUMN = "target"
-
-EXPECTED_COLUMNS = [
-    "age",
-    "sex",
-    "cp",
-    "trestbps",
-    "chol",
-    "fbs",
-    "restecg",
-    "thalach",
-    "exang",
-    "oldpeak",
-    "slope",
-    "ca",
-    "thal",
-    "target",
-]
-
-NUMERICAL_COLUMNS = ["age", "trestbps", "chol", "thalach", "oldpeak"]
-BINARY_COLUMNS = ["sex", "fbs", "exang", "target"]
-CATEGORICAL_COLUMNS = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal", "target"]
-
-TARGET_LABELS = {
-    0: "No heart disease",
-    1: "Heart disease present",
-}
 
 
 @dataclass(frozen=True)

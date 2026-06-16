@@ -42,3 +42,11 @@ python -m src.data
 ```
 
 This writes machine-readable audit tables to `outputs/results/` and a human-readable report to `reports/INITIAL_DATA_AUDIT.md`.
+
+Generate the formal data dictionary and encoded-value validation:
+
+```powershell
+python -m src.schema
+```
+
+This writes schema tables to `outputs/results/` and the data dictionary report to `reports/DATA_DICTIONARY.md`.
