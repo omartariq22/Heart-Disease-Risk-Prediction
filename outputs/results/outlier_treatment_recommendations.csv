@@ -1,0 +1,6 @@
+feature,iqr_outlier_count,recommendation,rationale
+age,0,No action,No IQR outliers were detected in the training split.
+trestbps,9,Keep for modelling,Detected values are clinically plausible extremes in this dataset. Document them and let robust validation decide model behavior.
+chol,3,Keep for modelling,Detected values are clinically plausible extremes in this dataset. Document them and let robust validation decide model behavior.
+thalach,0,No action,No IQR outliers were detected in the training split.
+oldpeak,2,Keep for modelling,Detected values are clinically plausible extremes in this dataset. Document them and let robust validation decide model behavior.

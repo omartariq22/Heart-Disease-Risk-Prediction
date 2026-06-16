@@ -1,0 +1,15 @@
+row_index_in_training_split,feature,value,target,target_label,lower_bound,upper_bound,method
+6,trestbps,172.0,1,Heart disease present,90.0,170.0,iqr
+80,trestbps,178.0,1,Heart disease present,90.0,170.0,iqr
+87,trestbps,180.0,1,Heart disease present,90.0,170.0,iqr
+160,trestbps,180.0,0,No heart disease,90.0,170.0,iqr
+179,trestbps,200.0,0,No heart disease,90.0,170.0,iqr
+192,trestbps,174.0,0,No heart disease,90.0,170.0,iqr
+199,trestbps,192.0,0,No heart disease,90.0,170.0,iqr
+209,trestbps,178.0,0,No heart disease,90.0,170.0,iqr
+214,trestbps,180.0,0,No heart disease,90.0,170.0,iqr
+76,chol,394.0,1,Heart disease present,118.0,366.0,iqr
+176,chol,407.0,0,No heart disease,118.0,366.0,iqr
+197,chol,409.0,0,No heart disease,118.0,366.0,iqr
+161,oldpeak,6.2,0,No heart disease,-2.7,4.5,iqr
+177,oldpeak,5.6,0,No heart disease,-2.7,4.5,iqr

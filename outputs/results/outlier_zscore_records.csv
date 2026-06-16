@@ -1,0 +1,8 @@
+row_index_in_training_split,feature,value,target,target_label,zscore,threshold,method
+179,trestbps,200.0,0,No heart disease,3.819,3.0,zscore
+199,trestbps,192.0,0,No heart disease,3.373,3.0,zscore
+76,chol,394.0,1,Heart disease present,3.118,3.0,zscore
+176,chol,407.0,0,No heart disease,3.389,3.0,zscore
+197,chol,409.0,0,No heart disease,3.431,3.0,zscore
+161,oldpeak,6.2,0,No heart disease,4.261,3.0,zscore
+177,oldpeak,5.6,0,No heart disease,3.762,3.0,zscore

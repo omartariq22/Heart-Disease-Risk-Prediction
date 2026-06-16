@@ -67,6 +67,14 @@ python -m src.eda
 
 This creates training-only EDA result tables in `outputs/results/`, 300 dpi figures in `outputs/figures/`, and the EDA report at `reports/EXPLORATORY_DATA_ANALYSIS.md`.
 
+Run outlier detection:
+
+```powershell
+python -m src.outliers
+```
+
+This creates training-only IQR/z-score outlier tables in `outputs/results/`, diagnostic figures in `outputs/figures/`, and the outlier report at `reports/OUTLIER_DETECTION_REPORT.md`.
+
 Run tests:
 
 ```powershell

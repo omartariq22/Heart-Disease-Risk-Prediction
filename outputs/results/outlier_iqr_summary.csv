@@ -1,0 +1,6 @@
+feature,q1,q3,iqr,lower_bound,upper_bound,outlier_count,outlier_percentage,min_outlier,max_outlier
+age,47.0,61.0,14.0,26.0,82.0,0,0.0,,
+trestbps,120.0,140.0,20.0,90.0,170.0,9,3.73,172.0,200.0
+chol,211.0,273.0,62.0,118.0,366.0,3,1.24,394.0,409.0
+thalach,136.0,168.0,32.0,88.0,216.0,0,0.0,,
+oldpeak,0.0,1.8,1.8,-2.7,4.5,2,0.83,5.6,6.2
