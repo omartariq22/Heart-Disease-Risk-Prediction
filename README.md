@@ -32,3 +32,13 @@ pip install -r requirements.txt
 ```
 
 The raw dataset is stored at `data/raw/heart.csv`.
+
+## Current Workflow
+
+Generate the initial raw-data audit:
+
+```powershell
+python -m src.data
+```
+
+This writes machine-readable audit tables to `outputs/results/` and a human-readable report to `reports/INITIAL_DATA_AUDIT.md`.

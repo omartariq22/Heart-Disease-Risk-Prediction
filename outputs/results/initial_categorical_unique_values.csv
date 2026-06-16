@@ -1,0 +1,10 @@
+column,n_unique,unique_values
+sex,2,"0, 1"
+cp,4,"0, 1, 2, 3"
+fbs,2,"0, 1"
+restecg,3,"0, 1, 2"
+exang,2,"0, 1"
+slope,3,"0, 1, 2"
+ca,5,"0, 1, 2, 3, 4"
+thal,4,"0, 1, 2, 3"
+target,2,"0, 1"
