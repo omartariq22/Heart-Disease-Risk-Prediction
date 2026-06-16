@@ -75,6 +75,14 @@ python -m src.outliers
 
 This creates training-only IQR/z-score outlier tables in `outputs/results/`, diagnostic figures in `outputs/figures/`, and the outlier report at `reports/OUTLIER_DETECTION_REPORT.md`.
 
+Inspect the shared modelling preprocessor:
+
+```powershell
+python -m src.model_preprocess
+```
+
+This writes preprocessing inspection tables to `outputs/results/` and the preprocessing report to `reports/PREPROCESSING_PIPELINE_REPORT.md`.
+
 Run tests:
 
 ```powershell

@@ -1,0 +1,14 @@
+feature,group,pipeline_steps
+age,numeric,SimpleImputer(strategy='median') -> StandardScaler()
+trestbps,numeric,SimpleImputer(strategy='median') -> StandardScaler()
+chol,numeric,SimpleImputer(strategy='median') -> StandardScaler()
+thalach,numeric,SimpleImputer(strategy='median') -> StandardScaler()
+oldpeak,numeric,SimpleImputer(strategy='median') -> StandardScaler()
+cp,nominal,"SimpleImputer(strategy='most_frequent') -> OneHotEncoder(handle_unknown='ignore', drop='if_binary')"
+restecg,nominal,"SimpleImputer(strategy='most_frequent') -> OneHotEncoder(handle_unknown='ignore', drop='if_binary')"
+slope,nominal,"SimpleImputer(strategy='most_frequent') -> OneHotEncoder(handle_unknown='ignore', drop='if_binary')"
+thal,nominal,"SimpleImputer(strategy='most_frequent') -> OneHotEncoder(handle_unknown='ignore', drop='if_binary')"
+ca,ordinal,SimpleImputer(strategy='most_frequent')
+sex,binary,passthrough
+fbs,binary,passthrough
+exang,binary,passthrough
