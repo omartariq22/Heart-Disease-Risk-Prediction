@@ -91,6 +91,14 @@ python -m src.models
 
 This evaluates the candidate classifiers with stratified 5-fold cross-validation on the training split only, writes `outputs/results/cv_results.csv`, and creates `reports/BASELINE_MODEL_COMPARISON.md`.
 
+Run model evaluation:
+
+```powershell
+python -m src.evaluate
+```
+
+This uses out-of-fold training predictions to generate ROC/PR curves, default-threshold metrics, threshold sweeps, confusion matrices, and `reports/MODEL_EVALUATION_REPORT.md`. The held-out test set is still not evaluated at this stage.
+
 Run tests:
 
 ```powershell

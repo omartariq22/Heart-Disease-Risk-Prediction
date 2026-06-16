@@ -1,0 +1,53 @@
+model,operating_point,actual,predicted,count
+XGBoost,default_0.50,0,0,85
+XGBoost,default_0.50,0,1,25
+XGBoost,default_0.50,1,0,15
+XGBoost,default_0.50,1,1,116
+Support Vector Machine,default_0.50,0,0,86
+Support Vector Machine,default_0.50,0,1,24
+Support Vector Machine,default_0.50,1,0,16
+Support Vector Machine,default_0.50,1,1,115
+Logistic Regression,default_0.50,0,0,89
+Logistic Regression,default_0.50,0,1,21
+Logistic Regression,default_0.50,1,0,17
+Logistic Regression,default_0.50,1,1,114
+Gaussian Naive Bayes,default_0.50,0,0,82
+Gaussian Naive Bayes,default_0.50,0,1,28
+Gaussian Naive Bayes,default_0.50,1,0,17
+Gaussian Naive Bayes,default_0.50,1,1,114
+Random Forest,default_0.50,0,0,84
+Random Forest,default_0.50,0,1,26
+Random Forest,default_0.50,1,0,18
+Random Forest,default_0.50,1,1,113
+K-Nearest Neighbors,default_0.50,0,0,85
+K-Nearest Neighbors,default_0.50,0,1,25
+K-Nearest Neighbors,default_0.50,1,0,18
+K-Nearest Neighbors,default_0.50,1,1,113
+Gradient Boosting,default_0.50,0,0,81
+Gradient Boosting,default_0.50,0,1,29
+Gradient Boosting,default_0.50,1,0,20
+Gradient Boosting,default_0.50,1,1,111
+Decision Tree,default_0.50,0,0,79
+Decision Tree,default_0.50,0,1,31
+Decision Tree,default_0.50,1,0,26
+Decision Tree,default_0.50,1,1,105
+Dummy Stratified,default_0.50,0,0,41
+Dummy Stratified,default_0.50,0,1,69
+Dummy Stratified,default_0.50,1,0,50
+Dummy Stratified,default_0.50,1,1,81
+Support Vector Machine,max_f1,0,0,80
+Support Vector Machine,max_f1,0,1,30
+Support Vector Machine,max_f1,1,0,9
+Support Vector Machine,max_f1,1,1,122
+Support Vector Machine,recall_at_least_0.90,0,0,80
+Support Vector Machine,recall_at_least_0.90,0,1,30
+Support Vector Machine,recall_at_least_0.90,1,0,9
+Support Vector Machine,recall_at_least_0.90,1,1,122
+XGBoost,max_f1,0,0,87
+XGBoost,max_f1,0,1,23
+XGBoost,max_f1,1,0,15
+XGBoost,max_f1,1,1,116
+XGBoost,recall_at_least_0.90,0,0,76
+XGBoost,recall_at_least_0.90,0,1,34
+XGBoost,recall_at_least_0.90,1,0,9
+XGBoost,recall_at_least_0.90,1,1,122
