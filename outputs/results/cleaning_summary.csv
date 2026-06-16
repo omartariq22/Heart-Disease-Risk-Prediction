@@ -1,0 +1,11 @@
+metric,value
+raw_rows,303
+raw_columns,14
+duplicate_rows_removed,1
+cleaned_rows,302
+cleaned_columns,14
+raw_explicit_missing_values,0
+cleaned_missing_values,6
+sentinel_values_decoded_to_nan,6
+target_0_count_after_cleaning,138
+target_1_count_after_cleaning,164

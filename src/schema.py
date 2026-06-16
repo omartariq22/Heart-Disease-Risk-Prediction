@@ -140,8 +140,14 @@ def _format_labels(labels: Mapping[int, str]) -> str:
     return "; ".join(f"{key} = {value}" for key, value in labels.items())
 
 
-def _format_values(values: set[int]) -> str:
-    return ", ".join(str(value) for value in sorted(values))
+def _format_single_value(value: int | float) -> str:
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return str(value)
+
+
+def _format_values(values: set[int | float]) -> str:
+    return ", ".join(_format_single_value(value) for value in sorted(values))
 
 
 def build_data_dictionary() -> pd.DataFrame:

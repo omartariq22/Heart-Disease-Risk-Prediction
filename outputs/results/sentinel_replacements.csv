@@ -1,0 +1,3 @@
+column,sentinel_values,n_replaced_with_nan
+ca,4,4
+thal,0,2

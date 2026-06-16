@@ -1,0 +1,6 @@
+column,observed_min,observed_max,allowed_min,allowed_max,unit,n_below_min,n_above_max,status
+age,29.0,77.0,0,120,years,0,0,pass
+trestbps,94.0,200.0,1,300,mm Hg,0,0,pass
+chol,126.0,564.0,1,700,mg/dl,0,0,pass
+thalach,71.0,202.0,1,250,beats per minute,0,0,pass
+oldpeak,0.0,6.2,0,10,ST depression,0,0,pass

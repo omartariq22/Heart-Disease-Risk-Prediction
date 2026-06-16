@@ -50,3 +50,17 @@ python -m src.schema
 ```
 
 This writes schema tables to `outputs/results/` and the data dictionary report to `reports/DATA_DICTIONARY.md`.
+
+Run deterministic data cleaning:
+
+```powershell
+python -m src.preprocess
+```
+
+This writes a cleaned inspection snapshot to `data/processed/heart_clean.csv`, cleaning tables to `outputs/results/`, and the cleaning report to `reports/DATA_CLEANING_REPORT.md`.
+
+Run tests:
+
+```powershell
+pytest
+```
