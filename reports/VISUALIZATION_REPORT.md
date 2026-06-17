@@ -61,7 +61,7 @@ Covered required/optional visualizations: 17/17
 | outliers_oldpeak_histogram_kde.png                                   | outputs/figures/outliers_oldpeak_histogram_kde.png                                   |       2052 |        1154 |            107754 |
 | outliers_thalach_histogram_kde.png                                   | outputs/figures/outliers_thalach_histogram_kde.png                                   |       2053 |        1154 |            139791 |
 | outliers_trestbps_histogram_kde.png                                  | outputs/figures/outliers_trestbps_histogram_kde.png                                  |       2053 |        1154 |            140014 |
-| tuning_model_comparison.png                                          | outputs/figures/tuning_model_comparison.png                                          |       2352 |        1454 |            117744 |
+| tuning_model_comparison.png                                          | outputs/figures/tuning_model_comparison.png                                          |       2352 |        1454 |            150570 |
 | visualization_cv_score_comparison_error_bars.png                     | outputs/figures/visualization_cv_score_comparison_error_bars.png                     |       3252 |        1454 |            241512 |
 | visualization_svm_calibration_curve.png                              | outputs/figures/visualization_svm_calibration_curve.png                              |       1752 |        1454 |            136755 |
 

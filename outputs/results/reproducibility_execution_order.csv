@@ -1,0 +1,14 @@
+order,step,description
+1,initial_data_audit,Load the raw dataset and write the initial data-quality audit.
+2,schema_validation,Generate the data dictionary and encoded-value validation outputs.
+3,data_cleaning,"Drop duplicates, decode sentinel missing values, and persist cleaning artifacts."
+4,exploratory_data_analysis,"Run training-only EDA, statistical tests, and EDA figures."
+5,outlier_detection,Detect and document plausible clinical outliers on the training split.
+6,preprocessing_inspection,Inspect the shared leak-proof ColumnTransformer preprocessing pipeline.
+7,baseline_model_comparison,Evaluate candidate classifiers with stratified 5-fold cross-validation.
+8,model_evaluation,"Generate out-of-fold evaluation metrics, curves, threshold sweeps, and confusion matrices."
+9,hyperparameter_tuning,Tune the strongest candidates and lock the selected model family.
+10,feature_interpretation,"Generate coefficient, feature-importance, and permutation-importance outputs."
+11,visualization_qa,Build the visualization manifest and required-figure coverage report.
+12,final_model_package,"Fit the locked tuned model, evaluate the held-out test set once, and write the model card."
+13,consolidated_reporting,Regenerate milestone and final project reports after final model packaging.

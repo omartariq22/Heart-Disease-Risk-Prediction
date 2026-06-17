@@ -33,6 +33,29 @@ pip install -r requirements.txt
 
 The raw dataset is stored at `data/raw/heart.csv`.
 
+## One-Command Reproducibility
+
+Run the complete project workflow from raw data through final reports:
+
+```powershell
+python -m src.run_all
+```
+
+This regenerates all tables, figures, reports, final held-out test metrics, the local ignored model artifact, and the reproducibility report at `reports/REPRODUCIBILITY_CHECK_REPORT.md`.
+
+To regenerate project outputs without running the test suite at the end:
+
+```powershell
+python -m src.run_all --skip-tests
+```
+
+## Notebooks
+
+The notebooks are thin narrative orchestrators over the tested `src/` modules:
+
+1. `notebooks/01_eda.ipynb`
+2. `notebooks/02_modelling.ipynb`
+
 ## Current Workflow
 
 Generate the initial raw-data audit:
