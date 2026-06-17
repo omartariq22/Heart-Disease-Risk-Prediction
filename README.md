@@ -123,6 +123,14 @@ python -m src.plots
 
 This indexes all generated figures, creates the final CV comparison and calibration plots, writes visualization QA tables to `outputs/results/`, and creates `reports/VISUALIZATION_REPORT.md`.
 
+Generate consolidated project reports:
+
+```powershell
+python -m src.reporting
+```
+
+This creates the milestone report at `reports/MILESTONE_1_REPORT.md` and the consolidated project report at `reports/FINAL_PROJECT_REPORT.md`.
+
 Run tests:
 
 ```powershell
