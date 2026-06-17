@@ -1,0 +1,5 @@
+method,top_features,interpretation
+Tuned SVM coefficients,"cp_0.0, thal_2.0, ca, thal_3.0, exang, sex, oldpeak, cp_2.0",Largest absolute linear effects in the selected tuned model.
+Tuned Logistic Regression coefficients,"cp_0.0, thal_2.0, ca, thal_3.0, sex, exang, oldpeak, cp_2.0",Linear coefficient sanity check from a strong calibrated baseline.
+Tuned XGBoost importances,"thal_2.0, cp_0.0, ca, exang, thalach, oldpeak, thal_3.0, slope_2.0",Tree-based split/gain importance from the strongest boosted-tree candidate.
+Permutation importance,"thal, cp, ca, oldpeak, chol, sex, exang, slope",Model-agnostic ROC-AUC drop after shuffling raw input features.

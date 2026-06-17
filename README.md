@@ -107,6 +107,14 @@ python -m src.tune
 
 This tunes the strongest baseline candidates with stratified 5-fold GridSearchCV, writes tuning tables to `outputs/results/`, and creates `reports/HYPERPARAMETER_TUNING_REPORT.md`.
 
+Run feature interpretation:
+
+```powershell
+python -m src.interpret
+```
+
+This fits tuned candidate pipelines on the training split, writes coefficient/importance tables to `outputs/results/`, exports interpretation figures, and creates `reports/FEATURE_IMPORTANCE_REPORT.md`.
+
 Run tests:
 
 ```powershell
