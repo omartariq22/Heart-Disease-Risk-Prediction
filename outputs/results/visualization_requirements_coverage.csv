@@ -1,0 +1,18 @@
+requirement,figure,status,relative_path,exists
+Target class distribution bar chart,eda_target_distribution.png,complete,outputs/figures/eda_target_distribution.png,True
+Age distribution histogram by target,eda_age_distribution_by_target.png,complete,outputs/figures/eda_age_distribution_by_target.png,True
+Heart disease percentage by age group,eda_age_group_target_rate.png,complete,outputs/figures/eda_age_group_target_rate.png,True
+Heart disease percentage by sex,eda_sex_target_rate.png,complete,outputs/figures/eda_sex_target_rate.png,True
+Pearson correlation heatmap,eda_pearson_correlation_heatmap.png,complete,outputs/figures/eda_pearson_correlation_heatmap.png,True
+Box plots for outlier detection,outliers_numeric_boxplots.png,complete,outputs/figures/outliers_numeric_boxplots.png,True
+Chest pain type vs target count plot,eda_chest_pain_vs_target.png,complete,outputs/figures/eda_chest_pain_vs_target.png,True
+Exercise-induced angina vs target count plot,eda_exang_vs_target.png,complete,outputs/figures/eda_exang_vs_target.png,True
+Maximum heart rate vs target box plot,eda_thalach_by_target.png,complete,outputs/figures/eda_thalach_by_target.png,True
+Cholesterol vs target box plot,eda_cholesterol_by_target.png,complete,outputs/figures/eda_cholesterol_by_target.png,True
+Mutual information feature relevance chart,eda_mutual_information.png,complete,outputs/figures/eda_mutual_information.png,True
+Model CV-score comparison with error bars,visualization_cv_score_comparison_error_bars.png,complete,outputs/figures/visualization_cv_score_comparison_error_bars.png,True
+ROC curve overlay,evaluation_roc_curves.png,complete,outputs/figures/evaluation_roc_curves.png,True
+Precision-recall curve overlay,evaluation_precision_recall_curves.png,complete,outputs/figures/evaluation_precision_recall_curves.png,True
+Confusion matrix heatmaps for top models,evaluation_confusion_support_vector_machine_recall_at_least_0.90.png,complete,outputs/figures/evaluation_confusion_support_vector_machine_recall_at_least_0.90.png,True
+Feature importance chart for final candidate,interpret_permutation_importance.png,complete,outputs/figures/interpret_permutation_importance.png,True
+Calibration plot for final candidate,visualization_svm_calibration_curve.png,complete_optional,outputs/figures/visualization_svm_calibration_curve.png,True

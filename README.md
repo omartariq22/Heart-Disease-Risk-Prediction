@@ -115,6 +115,14 @@ python -m src.interpret
 
 This fits tuned candidate pipelines on the training split, writes coefficient/importance tables to `outputs/results/`, exports interpretation figures, and creates `reports/FEATURE_IMPORTANCE_REPORT.md`.
 
+Run visualization QA:
+
+```powershell
+python -m src.plots
+```
+
+This indexes all generated figures, creates the final CV comparison and calibration plots, writes visualization QA tables to `outputs/results/`, and creates `reports/VISUALIZATION_REPORT.md`.
+
 Run tests:
 
 ```powershell
