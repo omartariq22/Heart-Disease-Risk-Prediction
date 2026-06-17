@@ -1,0 +1,2 @@
+artifact,model,best_params,locked_operating_point,locked_threshold,seed,train_rows,test_rows,model_path
+final_model,Support Vector Machine,"{""clf__C"": 0.1, ""clf__gamma"": ""scale"", ""clf__kernel"": ""linear""}",recall_at_least_0.90,0.4,42,241,61,outputs/models/final_model.joblib

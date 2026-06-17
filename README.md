@@ -131,6 +131,14 @@ python -m src.reporting
 
 This creates the milestone report at `reports/MILESTONE_1_REPORT.md` and the consolidated project report at `reports/FINAL_PROJECT_REPORT.md`.
 
+Finalize the model package:
+
+```powershell
+python -m src.finalize
+```
+
+This fits the locked tuned model, evaluates the held-out test set once, writes final test metrics to `outputs/results/`, creates `reports/MODEL_CARD.md`, and saves the local ignored model artifact at `outputs/models/final_model.joblib`.
+
 Run tests:
 
 ```powershell

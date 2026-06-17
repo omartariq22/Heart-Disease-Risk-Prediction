@@ -184,6 +184,7 @@ def render_final_report(results_dir: Path = RESULTS_DIR) -> str:
     insight_summary = _read_table(results_dir, "interpret_insight_summary.csv")
     permutation = _read_table(results_dir, "interpret_permutation_importance.csv")
     visualization_manifest = _read_table(results_dir, "visualization_figure_manifest.csv")
+    final_metrics_path = results_dir / "final_test_metrics.csv"
 
     top_baseline = baseline.sort_values(["recall_mean", "roc_auc_mean", "f1_mean"], ascending=False).iloc[0]
     selected_model = selected["model"].iloc[0]
@@ -192,6 +193,39 @@ def render_final_report(results_dir: Path = RESULTS_DIR) -> str:
     svm_operating_points = operating_points.loc[
         operating_points["model"].eq("Support Vector Machine")
     ]
+    if final_metrics_path.exists():
+        final_metrics = _read_table(results_dir, "final_test_metrics.csv")
+        locked_final = final_metrics.loc[
+            final_metrics["operating_point"].eq("recall_at_least_0.90")
+        ]
+        if locked_final.empty:
+            locked_final = final_metrics.tail(1)
+        locked_final_row = locked_final.iloc[0]
+        final_test_section = f"""## Final Held-Out Test Evaluation
+
+The held-out test set was evaluated once after model selection, hyperparameter tuning, and threshold selection were locked. The locked operating point achieved recall {locked_final_row["recall"]:.3f}, ROC-AUC {locked_final_row["roc_auc"]:.3f}, and F1 {locked_final_row["f1"]:.3f} on the test split.
+
+{_markdown_table(final_metrics)}
+"""
+        final_test_conclusion = (
+            f"- Final held-out test performance at the locked threshold: recall "
+            f"{locked_final_row['recall']:.3f}, ROC-AUC {locked_final_row['roc_auc']:.3f}, "
+            f"and F1 {locked_final_row['f1']:.3f}."
+        )
+        final_test_limitation = (
+            "- The held-out test set has now been evaluated once; future model changes require a new validation protocol rather than repeated test-set checking."
+        )
+    else:
+        final_test_section = """## Final Held-Out Test Evaluation
+
+The held-out test set remains locked at this documentation stage and should be evaluated once during final packaging/model-card generation.
+"""
+        final_test_conclusion = (
+            "- Final held-out test evaluation remains intentionally deferred until the final quality step."
+        )
+        final_test_limitation = (
+            "- Final held-out test-set evaluation and model-card packaging are intentionally deferred until the final quality step."
+        )
 
     return f"""# Final Project Report - Heart Disease Risk Prediction
 
@@ -279,7 +313,7 @@ The tuned shortlist contains Logistic Regression, Support Vector Machine, and XG
 
 Because this is a medical screening-style problem, recall is prioritized over accuracy. A false negative means a heart-disease-positive patient is missed; a false positive means a patient may receive unnecessary follow-up.
 
-The table below uses out-of-fold training predictions only. The held-out test set remains locked at this documentation stage and should be evaluated once during final packaging/model-card generation.
+The table below uses out-of-fold training predictions for model comparison and threshold selection.
 
 {_markdown_table(oof_metrics)}
 
@@ -292,6 +326,8 @@ The table below uses out-of-fold training predictions only. The held-out test se
 {_figure("evaluation_precision_recall_curves.png", "Precision-recall curve overlay")}
 
 {_figure("evaluation_confusion_support_vector_machine_recall_at_least_0.90.png", "Selected SVM tuned-threshold confusion matrix")}
+
+{final_test_section}
 
 ## Feature Importance And Observations
 
@@ -317,6 +353,7 @@ The project exports 300 dpi PNG figures for EDA, outlier diagnostics, model eval
 - Sentinel handling for `ca` and `thal` is the most important cleaning decision.
 - The tuned linear Support Vector Machine is the current selected model because it provides the strongest recall-oriented cross-validation profile.
 - A threshold of 0.40 on out-of-fold SVM predictions reaches recall above 0.90 while preserving a reasonable F1 score.
+{final_test_conclusion}
 - Feature interpretation consistently highlights chest-pain type, thalassemia category, vessel count, exercise-induced angina, `oldpeak`, and maximum heart rate.
 
 ## Limitations
@@ -324,7 +361,7 @@ The project exports 300 dpi PNG figures for EDA, outlier diagnostics, model eval
 - The dataset contains only 303 raw records before duplicate removal.
 - The data comes from a historical Cleveland Clinic subset and does not represent modern populations.
 - The binary target simplifies the original heart-disease severity scale.
-- Final held-out test-set evaluation and model-card packaging are intentionally deferred until the final quality step.
+{final_test_limitation}
 - The model should never be used as a substitute for professional medical diagnosis.
 """
 

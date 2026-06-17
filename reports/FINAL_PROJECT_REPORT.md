@@ -125,7 +125,7 @@ The tuned shortlist contains Logistic Regression, Support Vector Machine, and XG
 
 Because this is a medical screening-style problem, recall is prioritized over accuracy. A false negative means a heart-disease-positive patient is missed; a false positive means a patient may receive unnecessary follow-up.
 
-The table below uses out-of-fold training predictions only. The held-out test set remains locked at this documentation stage and should be evaluated once during final packaging/model-card generation.
+The table below uses out-of-fold training predictions for model comparison and threshold selection.
 
 | model                  |   threshold |   accuracy |   precision |   recall |   specificity |       f1 |   roc_auc |   average_precision |   true_negative |   false_positive |   false_negative |   true_positive |
 |:-----------------------|------------:|-----------:|------------:|---------:|--------------:|---------:|----------:|--------------------:|----------------:|-----------------:|-----------------:|----------------:|
@@ -152,6 +152,16 @@ The table below uses out-of-fold training predictions only. The held-out test se
 ![Precision-recall curve overlay](../outputs/figures/evaluation_precision_recall_curves.png)
 
 ![Selected SVM tuned-threshold confusion matrix](../outputs/figures/evaluation_confusion_support_vector_machine_recall_at_least_0.90.png)
+
+## Final Held-Out Test Evaluation
+
+The held-out test set was evaluated once after model selection, hyperparameter tuning, and threshold selection were locked. The locked operating point achieved recall 0.909, ROC-AUC 0.912, and F1 0.811 on the test split.
+
+| model                  | evaluation_split   | operating_point      |   threshold |   accuracy |   precision |   recall |   specificity |       f1 |   roc_auc |   average_precision |   true_negative |   false_positive |   false_negative |   true_positive |
+|:-----------------------|:-------------------|:---------------------|------------:|-----------:|------------:|---------:|--------------:|---------:|----------:|--------------------:|----------------:|-----------------:|-----------------:|----------------:|
+| Support Vector Machine | held_out_test      | default_0.50         |         0.5 |   0.803279 |    0.769231 | 0.909091 |      0.678571 | 0.833333 |  0.912338 |            0.926877 |              19 |                9 |                3 |              30 |
+| Support Vector Machine | held_out_test      | recall_at_least_0.90 |         0.4 |   0.770492 |    0.731707 | 0.909091 |      0.607143 | 0.810811 |  0.912338 |            0.926877 |              17 |               11 |                3 |              30 |
+
 
 ## Feature Importance And Observations
 
@@ -229,6 +239,7 @@ The project exports 300 dpi PNG figures for EDA, outlier diagnostics, model eval
 - Sentinel handling for `ca` and `thal` is the most important cleaning decision.
 - The tuned linear Support Vector Machine is the current selected model because it provides the strongest recall-oriented cross-validation profile.
 - A threshold of 0.40 on out-of-fold SVM predictions reaches recall above 0.90 while preserving a reasonable F1 score.
+- Final held-out test performance at the locked threshold: recall 0.909, ROC-AUC 0.912, and F1 0.811.
 - Feature interpretation consistently highlights chest-pain type, thalassemia category, vessel count, exercise-induced angina, `oldpeak`, and maximum heart rate.
 
 ## Limitations
@@ -236,5 +247,5 @@ The project exports 300 dpi PNG figures for EDA, outlier diagnostics, model eval
 - The dataset contains only 303 raw records before duplicate removal.
 - The data comes from a historical Cleveland Clinic subset and does not represent modern populations.
 - The binary target simplifies the original heart-disease severity scale.
-- Final held-out test-set evaluation and model-card packaging are intentionally deferred until the final quality step.
+- The held-out test set has now been evaluated once; future model changes require a new validation protocol rather than repeated test-set checking.
 - The model should never be used as a substitute for professional medical diagnosis.

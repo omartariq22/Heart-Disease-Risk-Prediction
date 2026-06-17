@@ -17,4 +17,4 @@ def test_reporting_generates_milestone_and_final_reports(tmp_path) -> None:
     assert "Final Project Report" in final
     assert "Classification Models" in final
     assert "Support Vector Machine" in final
-    assert "held-out test set remains locked" in final
+    assert "Final Held-Out Test Evaluation" in final
