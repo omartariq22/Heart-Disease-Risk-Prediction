@@ -1,0 +1,4 @@
+model,best_params,best_refit_score,accuracy_mean,accuracy_std,precision_mean,precision_std,recall_mean,recall_std,f1_mean,f1_std,roc_auc_mean,roc_auc_std,average_precision_mean,average_precision_std
+Support Vector Machine,"{""clf__C"": 0.1, ""clf__gamma"": ""scale"", ""clf__kernel"": ""linear""}",0.921031,0.859014,0.054669,0.846551,0.058653,0.908262,0.039463,0.875794,0.046373,0.921031,0.037555,0.928812,0.034115
+XGBoost,"{""clf__learning_rate"": 0.05, ""clf__max_depth"": 2, ""clf__n_estimators"": 100}",0.916175,0.85051,0.042803,0.843433,0.047318,0.892877,0.038164,0.866798,0.036614,0.916175,0.031525,0.926632,0.023179
+Logistic Regression,"{""clf__C"": 0.1, ""clf__penalty"": ""l2"", ""clf__solver"": ""lbfgs""}",0.924501,0.858844,0.048419,0.859878,0.047782,0.885185,0.042665,0.872185,0.043697,0.924501,0.038629,0.933305,0.036493

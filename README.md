@@ -99,6 +99,14 @@ python -m src.evaluate
 
 This uses out-of-fold training predictions to generate ROC/PR curves, default-threshold metrics, threshold sweeps, confusion matrices, and `reports/MODEL_EVALUATION_REPORT.md`. The held-out test set is still not evaluated at this stage.
 
+Run hyperparameter tuning:
+
+```powershell
+python -m src.tune
+```
+
+This tunes the strongest baseline candidates with stratified 5-fold GridSearchCV, writes tuning tables to `outputs/results/`, and creates `reports/HYPERPARAMETER_TUNING_REPORT.md`.
+
 Run tests:
 
 ```powershell
