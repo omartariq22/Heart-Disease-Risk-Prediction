@@ -8,8 +8,8 @@ def test_execution_order_table_matches_workflow_steps() -> None:
 
     assert table["order"].is_monotonic_increasing
     assert table["step"].iloc[0] == "initial_data_audit"
-    assert table["step"].iloc[-1] == "consolidated_reporting"
-    assert table.shape[0] == 13
+    assert table["step"].iloc[-1] == "submission_acceptance_check"
+    assert table.shape[0] == 14
 
 
 def test_run_workflow_steps_executes_in_order() -> None:

@@ -12,6 +12,7 @@ from typing import Callable
 
 import pandas as pd
 
+from src.acceptance import run_acceptance_check
 from src.data import run_initial_audit
 from src.eda import run_eda
 from src.evaluate import run_model_evaluation
@@ -129,6 +130,12 @@ WORKFLOW_STEPS = [
         "consolidated_reporting",
         "Regenerate milestone and final project reports after final model packaging.",
         run_reporting,
+    ),
+    WorkflowStep(
+        14,
+        "submission_acceptance_check",
+        "Verify submission artifacts and success-criteria evidence.",
+        run_acceptance_check,
     ),
 ]
 

@@ -1,0 +1,11 @@
+criterion,description,evidence,passed,missing_evidence
+dataset_documented,"Dataset is documented, including sentinel values for `ca` and `thal`.",reports/DATA_DICTIONARY.md; reports/DATA_CLEANING_REPORT.md,True,
+leakage_controlled,Preprocessing uses a shared pipeline fitted inside training folds.,reports/PREPROCESSING_PIPELINE_REPORT.md; src/model_preprocess.py,True,
+eda_quantified,EDA includes plots plus statistical association tables.,reports/EXPLORATORY_DATA_ANALYSIS.md; outputs/results/eda_chi_square_tests.csv,True,
+outliers_documented,"Outliers are detected, documented, and preserved when plausible.",reports/OUTLIER_DETECTION_REPORT.md; outputs/results/outlier_treatment_recommendations.csv,True,
+models_compared,Multiple classifiers and a dummy baseline are compared with stratified 5-fold CV.,reports/BASELINE_MODEL_COMPARISON.md; outputs/results/cv_results.csv,True,
+threshold_tuned,Threshold tuning is documented with default and recall-priority operating points.,reports/MODEL_EVALUATION_REPORT.md; outputs/results/evaluation_operating_points.csv,True,
+test_evaluated_once,Held-out test evaluation is reported after model and threshold decisions are locked.,reports/FINAL_TEST_EVALUATION_REPORT.md; outputs/results/final_test_metrics.csv,True,
+figures_exported,Required figures are exported and indexed.,reports/VISUALIZATION_REPORT.md; outputs/results/visualization_requirements_coverage.csv,True,
+interpretability_completed,Feature importance and medical insight analysis are documented.,reports/FEATURE_IMPORTANCE_REPORT.md; outputs/results/interpret_insight_summary.csv,True,
+reproducible,The project can run end-to-end from raw data with fixed dependencies and seed.,reports/REPRODUCIBILITY_CHECK_REPORT.md; src/run_all.py,True,

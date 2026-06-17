@@ -1,0 +1,9 @@
+metric,value
+required_artifacts_present,True
+success_criteria_passed,True
+visualization_coverage,17/17
+final_model,Support Vector Machine
+locked_threshold,0.4
+held_out_test_recall,0.909
+held_out_test_roc_auc,0.912
+held_out_test_f1,0.811

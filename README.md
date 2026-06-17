@@ -42,6 +42,7 @@ python -m src.run_all
 ```
 
 This regenerates all tables, figures, reports, final held-out test metrics, the local ignored model artifact, and the reproducibility report at `reports/REPRODUCIBILITY_CHECK_REPORT.md`.
+It also writes the final submission checklist at `reports/SUBMISSION_CHECKLIST.md`.
 
 To regenerate project outputs without running the test suite at the end:
 
@@ -161,6 +162,14 @@ python -m src.finalize
 ```
 
 This fits the locked tuned model, evaluates the held-out test set once, writes final test metrics to `outputs/results/`, creates `reports/MODEL_CARD.md`, and saves the local ignored model artifact at `outputs/models/final_model.joblib`.
+
+Run the final submission acceptance check:
+
+```powershell
+python -m src.acceptance
+```
+
+This verifies required project artifacts and success-criteria evidence, then writes `reports/SUBMISSION_CHECKLIST.md`.
 
 Run tests:
 

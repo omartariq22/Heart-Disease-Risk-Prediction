@@ -1,0 +1,12 @@
+artifact,relative_path,description,exists
+raw_dataset,data/raw/heart.csv,Original raw dataset is present.,True
+eda_notebook,notebooks/01_eda.ipynb,Narrative EDA notebook is present.,True
+modelling_notebook,notebooks/02_modelling.ipynb,Narrative modelling notebook is present.,True
+milestone_report,reports/MILESTONE_1_REPORT.md,Milestone report is present.,True
+final_report,reports/FINAL_PROJECT_REPORT.md,Final project report is present.,True
+model_card,reports/MODEL_CARD.md,Model card is present.,True
+final_test_report,reports/FINAL_TEST_EVALUATION_REPORT.md,Final held-out test report is present.,True
+reproducibility_report,reports/REPRODUCIBILITY_CHECK_REPORT.md,Reproducibility report is present.,True
+final_metrics,outputs/results/final_test_metrics.csv,Final test metrics are present.,True
+visualization_coverage,outputs/results/visualization_requirements_coverage.csv,Visualization coverage table is present.,True
+final_model,outputs/models/final_model.joblib,Local generated final model artifact is present.,True

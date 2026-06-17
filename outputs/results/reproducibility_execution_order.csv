@@ -12,3 +12,4 @@ order,step,description
 11,visualization_qa,Build the visualization manifest and required-figure coverage report.
 12,final_model_package,"Fit the locked tuned model, evaluate the held-out test set once, and write the model card."
 13,consolidated_reporting,Regenerate milestone and final project reports after final model packaging.
+14,submission_acceptance_check,Verify submission artifacts and success-criteria evidence.
