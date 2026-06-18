@@ -1,29 +1,176 @@
 # Heart Disease Risk Prediction
 
-A professional data mining and machine learning project for heart disease prediction using structured preprocessing, exploratory analysis, outlier detection, model comparison, threshold tuning, and reproducible reporting.
+An end-to-end, reproducible data-mining and machine-learning project that predicts heart-disease risk on the Cleveland dataset. The project follows a strict train/test discipline, compares eight classifiers under stratified 5-fold cross-validation, tunes the top candidates, locks a recall-priority operating point, and evaluates the held-out test set **exactly once**.
 
-## Runtime
+> **Final model:** Support Vector Machine (linear, C = 0.1) · **Locked threshold:** 0.40 · **Held-out recall:** 0.909 · **ROC-AUC:** 0.912 · **F1:** 0.811
 
-- Python 3.11+
-- Pinned dependencies in `requirements.txt`
-- Global reproducibility seed: `src.SEED = 42`
+---
+
+## Table of Contents
+
+1. [Highlights](#highlights)
+2. [Results at a Glance](#results-at-a-glance)
+3. [Project Structure](#project-structure)
+4. [End-to-End Pipeline](#end-to-end-pipeline)
+5. [Orchestration](#orchestration)
+6. [Setup](#setup)
+7. [One-Command Reproducibility](#one-command-reproducibility)
+8. [Stage-by-Stage Commands](#stage-by-stage-commands)
+9. [Exploratory Data Analysis](#exploratory-data-analysis)
+10. [Modelling & Evaluation](#modelling--evaluation)
+11. [Interpretation](#interpretation)
+12. [Reports & Artifacts](#reports--artifacts)
+13. [Testing](#testing)
+14. [Reproducibility & Determinism](#reproducibility--determinism)
+
+---
+
+## Highlights
+
+- **16 fully tested `src/` modules** covering the entire ML lifecycle — from raw data audit to final acceptance gate.
+- **Strict data hygiene:** the test split is created once and is **never** touched until the final evaluation step.
+- **8 baselines** compared under stratified 5-fold CV (Dummy, Logistic Regression, KNN, SVM, Decision Tree, Random Forest, Gaussian NB, Gradient Boosting, XGBoost).
+- **Recall-priority threshold tuning** — false negatives are weighted as more serious than false positives.
+- **Multi-angle interpretation:** logistic coefficients, SVM coefficients, XGBoost gains, and permutation importance.
+- **32 publication-quality figures** (300 dpi) and **57 result CSVs** generated automatically.
+- **One-command reproducibility** via `python -m src.run_all` with a programmatic acceptance gate.
+
+---
+
+## Results at a Glance
+
+### Held-Out Test Metrics — Final Locked Model (SVM, threshold = 0.40)
+
+| Metric              | Value  |
+|---------------------|-------:|
+| Recall (sensitivity)| 0.909  |
+| ROC-AUC             | 0.912  |
+| Average Precision   | 0.927  |
+| F1 Score            | 0.811  |
+| Precision           | 0.732  |
+| Specificity         | 0.607  |
+| Accuracy            | 0.770  |
+| False Negatives     | 3      |
+| False Positives     | 11     |
+
+### Cross-Validated Model Comparison (out-of-fold, threshold = 0.50)
+
+| Model                  | ROC-AUC | F1     | Recall | Precision |
+|------------------------|--------:|-------:|-------:|----------:|
+| Logistic Regression    | 0.912   | 0.857  | 0.870  | 0.844     |
+| **Support Vector Machine** | **0.900** | **0.852** | **0.878** | **0.827** |
+| XGBoost                | 0.901   | 0.853  | 0.885  | 0.823     |
+| Random Forest          | 0.900   | 0.837  | 0.863  | 0.813     |
+| Gaussian NB            | 0.858   | 0.835  | 0.870  | 0.803     |
+| K-Nearest Neighbors    | 0.882   | 0.840  | 0.863  | 0.819     |
+| Gradient Boosting      | 0.868   | 0.819  | 0.847  | 0.793     |
+| Decision Tree          | 0.760   | 0.787  | 0.802  | 0.772     |
+| Dummy (Stratified)     | 0.496   | 0.577  | 0.618  | 0.540     |
+
+![Cross-validated score comparison](outputs/figures/visualization_cv_score_comparison_error_bars.png)
+
+---
 
 ## Project Structure
 
 ```text
-data/
-  raw/                 Original input data; never modified manually.
-  processed/           Generated cleaned snapshots.
-notebooks/             Thin narrative notebooks that call reusable code.
-src/                   Reusable project logic.
-outputs/
-  figures/             Exported 300 dpi plots.
-  models/              Serialized trained pipelines.
-  results/             CSV result tables.
-reports/               Report assets and model card.
+Heart-Disease-Risk-Prediction/
+├── data/
+│   ├── raw/                       # Original Cleveland CSV (never modified)
+│   └── processed/                 # Cleaned snapshot (regenerated)
+├── notebooks/
+│   ├── 01_eda.ipynb               # Narrative EDA over src/eda.py
+│   └── 02_modelling.ipynb         # Narrative modelling over src/models.py
+├── src/                           # 16 reusable, tested modules
+│   ├── data.py                    # Raw-data audit
+│   ├── schema.py                  # Data dictionary & validation
+│   ├── preprocess.py              # Deterministic cleaning
+│   ├── eda.py                     # Statistical EDA (train-only)
+│   ├── outliers.py                # IQR / z-score detection
+│   ├── split.py                   # Stratified 80/20 split
+│   ├── model_preprocess.py        # ColumnTransformer pipeline
+│   ├── models.py                  # 8-baseline CV comparison
+│   ├── evaluate.py                # ROC/PR, threshold sweep, OOF
+│   ├── tune.py                    # GridSearchCV on top candidates
+│   ├── interpret.py               # Coefficients & importances
+│   ├── plots.py                   # Visualization QA layer
+│   ├── reporting.py               # Consolidated reports
+│   ├── finalize.py                # Fit-on-train, score-on-test ONCE
+│   ├── acceptance.py              # Submission gate
+│   └── run_all.py                 # End-to-end orchestrator
+├── tests/                         # pytest suite for every src module
+├── outputs/
+│   ├── figures/                   # 32 × 300 dpi PNGs
+│   ├── models/                    # final_model.joblib (gitignored)
+│   └── results/                   # 57 result CSVs
+├── reports/                       # 17 Markdown reports
+├── requirements.txt               # Pinned dependencies
+└── README.md
 ```
 
+---
+
+## End-to-End Pipeline
+
+```mermaid
+flowchart TD
+    A["data/raw/heart.csv"] --> B["src.data<br/>raw-data audit"]
+    B --> C["src.schema<br/>data dictionary"]
+    C --> D["src.preprocess<br/>deterministic cleaning"]
+    D --> E["data/processed/heart_clean.csv"]
+    E --> F["src.split<br/>stratified 80/20"]
+    F -->|train| G["src.eda<br/>statistical EDA"]
+    F -->|train| H["src.outliers<br/>IQR / z-score"]
+    F -->|train| I["src.model_preprocess<br/>ColumnTransformer"]
+    I --> J["src.models<br/>8-baseline 5-fold CV"]
+    J --> K["src.evaluate<br/>ROC/PR + threshold sweep"]
+    K --> L["src.tune<br/>GridSearchCV top-3"]
+    L --> M["src.interpret<br/>coefficients & importances"]
+    M --> N["src.plots<br/>visualization QA"]
+    N --> O["src.reporting<br/>consolidated reports"]
+    O --> P["src.finalize<br/>fit on train, test ONCE"]
+    P --> Q["src.acceptance<br/>submission gate"]
+    Q --> R["reports/SUBMISSION_CHECKLIST.md"]
+
+    style F fill:#fde68a,stroke:#92400e
+    style P fill:#fecaca,stroke:#991b1b
+    style R fill:#bbf7d0,stroke:#166534
+```
+
+**Key discipline:** the held-out test fold produced by `src.split` is sealed until `src.finalize`. Every intermediate stage operates on the training split only.
+
+---
+
+## Orchestration
+
+| # | Stage                  | Command                            | Inputs                          | Key Outputs                                                                |
+|---|------------------------|------------------------------------|---------------------------------|----------------------------------------------------------------------------|
+| 1 | Raw-data audit         | `python -m src.data`               | `data/raw/heart.csv`            | `reports/INITIAL_DATA_AUDIT.md`, 6 audit CSVs                              |
+| 2 | Schema & dictionary    | `python -m src.schema`             | raw CSV                         | `reports/DATA_DICTIONARY.md`, validation CSVs                              |
+| 3 | Cleaning               | `python -m src.preprocess`         | raw CSV                         | `data/processed/heart_clean.csv`, `DATA_CLEANING_REPORT.md`                |
+| 4 | EDA                    | `python -m src.eda`                | clean CSV (train only)          | 10 figures + 9 CSVs, `EXPLORATORY_DATA_ANALYSIS.md`                        |
+| 5 | Outlier detection      | `python -m src.outliers`           | clean CSV (train only)          | 7 figures + IQR/z-score CSVs, `OUTLIER_DETECTION_REPORT.md`                |
+| 6 | Preprocessor inspection| `python -m src.model_preprocess`   | clean CSV                       | column routing CSV, `PREPROCESSING_PIPELINE_REPORT.md`                     |
+| 7 | Baseline comparison    | `python -m src.models`             | clean CSV                       | `cv_results.csv`, `BASELINE_MODEL_COMPARISON.md`                           |
+| 8 | OOF evaluation         | `python -m src.evaluate`           | clean CSV                       | ROC/PR/threshold figures, `MODEL_EVALUATION_REPORT.md`                     |
+| 9 | Hyperparameter tuning  | `python -m src.tune`               | clean CSV                       | `tuning_full_cv_results.csv`, `HYPERPARAMETER_TUNING_REPORT.md`            |
+| 10| Interpretation         | `python -m src.interpret`          | clean CSV                       | coefficient/importance CSVs + figures, `FEATURE_IMPORTANCE_REPORT.md`      |
+| 11| Visualization QA       | `python -m src.plots`              | all figures                     | `visualization_figure_manifest.csv`, `VISUALIZATION_REPORT.md`             |
+| 12| Consolidated reports   | `python -m src.reporting`          | all results                     | `MILESTONE_1_REPORT.md`, `FINAL_PROJECT_REPORT.md`                         |
+| 13| Final model + test     | `python -m src.finalize`           | clean CSV, locked params        | `final_model.joblib`, `MODEL_CARD.md`, `FINAL_TEST_EVALUATION_REPORT.md`   |
+| 14| Acceptance gate        | `python -m src.acceptance`         | all artifacts                   | `SUBMISSION_CHECKLIST.md`                                                  |
+| 15| End-to-end             | `python -m src.run_all`            | raw CSV                         | **all of the above + pytest run**                                          |
+
+---
+
 ## Setup
+
+### Requirements
+
+- Python **3.11+**
+- See `requirements.txt` for pinned dependencies (scikit-learn, XGBoost, pandas, numpy, matplotlib, seaborn, scipy, joblib, pytest, jupyter).
+
+### Install
 
 ```powershell
 python -m venv .venv
@@ -31,148 +178,205 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-The raw dataset is stored at `data/raw/heart.csv`.
+On macOS / Linux:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+The raw dataset ships with the repo at `data/raw/heart.csv` (302 unique rows after duplicate removal).
+
+---
 
 ## One-Command Reproducibility
 
-Run the complete project workflow from raw data through final reports:
+Run the **entire** project — audit → clean → EDA → CV → tune → finalize → tests:
 
 ```powershell
 python -m src.run_all
 ```
 
-This regenerates all tables, figures, reports, final held-out test metrics, the local ignored model artifact, and the reproducibility report at `reports/REPRODUCIBILITY_CHECK_REPORT.md`.
-It also writes the final submission checklist at `reports/SUBMISSION_CHECKLIST.md`.
+This regenerates every figure, CSV, and report, fits the final model artifact, evaluates the held-out test set, runs the full pytest suite, and writes the acceptance checklist at `reports/SUBMISSION_CHECKLIST.md`.
 
-To regenerate project outputs without running the test suite at the end:
+Skip the test suite at the end:
 
 ```powershell
 python -m src.run_all --skip-tests
 ```
 
-## Notebooks
+---
 
-The notebooks are thin narrative orchestrators over the tested `src/` modules:
+## Stage-by-Stage Commands
 
-1. `notebooks/01_eda.ipynb`
-2. `notebooks/02_modelling.ipynb`
-
-## Current Workflow
-
-Generate the initial raw-data audit:
+Each module is independently runnable for incremental work:
 
 ```powershell
-python -m src.data
+python -m src.data                # 1. Initial raw-data audit
+python -m src.schema              # 2. Data dictionary & validation
+python -m src.preprocess          # 3. Deterministic cleaning
+python -m src.eda                 # 4. Train-only EDA
+python -m src.outliers            # 5. Outlier detection
+python -m src.model_preprocess    # 6. Preprocessor inspection
+python -m src.models              # 7. Baseline CV comparison
+python -m src.evaluate            # 8. OOF threshold sweep
+python -m src.tune                # 9. GridSearchCV tuning
+python -m src.interpret           # 10. Coefficients & importances
+python -m src.plots               # 11. Visualization QA
+python -m src.reporting           # 12. Consolidated reports
+python -m src.finalize            # 13. Fit final + evaluate test ONCE
+python -m src.acceptance          # 14. Submission acceptance gate
 ```
 
-This writes machine-readable audit tables to `outputs/results/` and a human-readable report to `reports/INITIAL_DATA_AUDIT.md`.
+### Notebooks
 
-Generate the formal data dictionary and encoded-value validation:
+Thin narrative layers over the tested `src/` modules:
 
-```powershell
-python -m src.schema
-```
+1. `notebooks/01_eda.ipynb` — narrated exploratory analysis
+2. `notebooks/02_modelling.ipynb` — narrated modelling & evaluation
 
-This writes schema tables to `outputs/results/` and the data dictionary report to `reports/DATA_DICTIONARY.md`.
+---
 
-Run deterministic data cleaning:
+## Exploratory Data Analysis
 
-```powershell
-python -m src.preprocess
-```
+The training-only EDA captures target balance, demographic patterns, feature distributions by outcome, and feature/target correlation structure.
 
-This writes a cleaned inspection snapshot to `data/processed/heart_clean.csv`, cleaning tables to `outputs/results/`, and the cleaning report to `reports/DATA_CLEANING_REPORT.md`.
+<p align="center">
+  <img src="outputs/figures/eda_target_distribution.png" width="48%" />
+  <img src="outputs/figures/eda_pearson_correlation_heatmap.png" width="48%" />
+</p>
 
-Run exploratory data analysis:
+<p align="center">
+  <img src="outputs/figures/eda_age_distribution_by_target.png" width="48%" />
+  <img src="outputs/figures/eda_chest_pain_vs_target.png" width="48%" />
+</p>
 
-```powershell
-python -m src.eda
-```
+Statistical companions are written to `outputs/results/`:
+`eda_chi_square_tests.csv`, `eda_mann_whitney_tests.csv`, `eda_mutual_information.csv`, `eda_pearson_correlation.csv`, `eda_spearman_correlation.csv`, and target-stratified summaries.
 
-This creates training-only EDA result tables in `outputs/results/`, 300 dpi figures in `outputs/figures/`, and the EDA report at `reports/EXPLORATORY_DATA_ANALYSIS.md`.
+Full narrative: [`reports/EXPLORATORY_DATA_ANALYSIS.md`](reports/EXPLORATORY_DATA_ANALYSIS.md).
 
-Run outlier detection:
+---
 
-```powershell
-python -m src.outliers
-```
+## Modelling & Evaluation
 
-This creates training-only IQR/z-score outlier tables in `outputs/results/`, diagnostic figures in `outputs/figures/`, and the outlier report at `reports/OUTLIER_DETECTION_REPORT.md`.
+### Preprocessing pipeline
 
-Inspect the shared modelling preprocessor:
+A single `ColumnTransformer` standardizes feature treatment across every estimator:
 
-```powershell
-python -m src.model_preprocess
-```
+| Feature group | Examples                         | Imputation       | Encoding / Scaling     |
+|---------------|----------------------------------|------------------|------------------------|
+| Numeric       | `age`, `trestbps`, `chol`, `thalach`, `oldpeak` | Median           | StandardScaler         |
+| Nominal       | `cp`, `restecg`, `slope`, `thal` | Most frequent    | One-hot (drop first)   |
+| Ordinal/count | `ca`                             | Most frequent    | Passthrough            |
+| Binary        | `sex`, `fbs`, `exang`            | None             | Passthrough            |
 
-This writes preprocessing inspection tables to `outputs/results/` and the preprocessing report to `reports/PREPROCESSING_PIPELINE_REPORT.md`.
+### Cross-validated ROC / PR curves and threshold behaviour
 
-Run baseline model comparison:
+<p align="center">
+  <img src="outputs/figures/evaluation_roc_curves.png" width="48%" />
+  <img src="outputs/figures/evaluation_precision_recall_curves.png" width="48%" />
+</p>
 
-```powershell
-python -m src.models
-```
+<p align="center">
+  <img src="outputs/figures/evaluation_threshold_sweep.png" width="80%" />
+</p>
 
-This evaluates the candidate classifiers with stratified 5-fold cross-validation on the training split only, writes `outputs/results/cv_results.csv`, and creates `reports/BASELINE_MODEL_COMPARISON.md`.
+### Locked operating point — recall ≥ 0.90
 
-Run model evaluation:
+The threshold is selected on **training-fold OOF predictions** and applied unchanged to the test set.
 
-```powershell
-python -m src.evaluate
-```
+<p align="center">
+  <img src="outputs/figures/evaluation_confusion_support_vector_machine_recall_at_least_0.90.png" width="48%" />
+  <img src="outputs/figures/evaluation_confusion_support_vector_machine_default_0.50.png" width="48%" />
+</p>
 
-This uses out-of-fold training predictions to generate ROC/PR curves, default-threshold metrics, threshold sweeps, confusion matrices, and `reports/MODEL_EVALUATION_REPORT.md`. The held-out test set is still not evaluated at this stage.
+Full narrative: [`reports/MODEL_EVALUATION_REPORT.md`](reports/MODEL_EVALUATION_REPORT.md) and [`reports/HYPERPARAMETER_TUNING_REPORT.md`](reports/HYPERPARAMETER_TUNING_REPORT.md).
 
-Run hyperparameter tuning:
+---
 
-```powershell
-python -m src.tune
-```
+## Interpretation
 
-This tunes the strongest baseline candidates with stratified 5-fold GridSearchCV, writes tuning tables to `outputs/results/`, and creates `reports/HYPERPARAMETER_TUNING_REPORT.md`.
+Three complementary views of feature signal — linear weights, tree-based gain, and model-agnostic permutation importance.
 
-Run feature interpretation:
+<p align="center">
+  <img src="outputs/figures/interpret_svm_coefficients.png" width="48%" />
+  <img src="outputs/figures/interpret_permutation_importance.png" width="48%" />
+</p>
 
-```powershell
-python -m src.interpret
-```
+<p align="center">
+  <img src="outputs/figures/interpret_xgboost_importances.png" width="48%" />
+  <img src="outputs/figures/interpret_logistic_coefficients.png" width="48%" />
+</p>
 
-This fits tuned candidate pipelines on the training split, writes coefficient/importance tables to `outputs/results/`, exports interpretation figures, and creates `reports/FEATURE_IMPORTANCE_REPORT.md`.
+Across methods, the strongest signals are consistent with clinical intuition: `cp` (chest-pain type), `ca` (major vessels coloured by fluoroscopy), `thal`, `oldpeak`, and `thalach` dominate.
 
-Run visualization QA:
+Full narrative: [`reports/FEATURE_IMPORTANCE_REPORT.md`](reports/FEATURE_IMPORTANCE_REPORT.md).
 
-```powershell
-python -m src.plots
-```
+---
 
-This indexes all generated figures, creates the final CV comparison and calibration plots, writes visualization QA tables to `outputs/results/`, and creates `reports/VISUALIZATION_REPORT.md`.
+## Reports & Artifacts
 
-Generate consolidated project reports:
+### Reports (`reports/`)
 
-```powershell
-python -m src.reporting
-```
+| Report                              | Purpose                                                |
+|-------------------------------------|--------------------------------------------------------|
+| `INITIAL_DATA_AUDIT.md`             | Raw-data shape, dtypes, missingness, duplicates        |
+| `DATA_DICTIONARY.md`                | Formal schema with encoded value ranges                |
+| `DATA_CLEANING_REPORT.md`           | Sentinel handling, deduplication, type coercion        |
+| `EXPLORATORY_DATA_ANALYSIS.md`      | Statistical EDA, correlations, target patterns         |
+| `OUTLIER_DETECTION_REPORT.md`       | IQR & z-score outlier inventory                        |
+| `PREPROCESSING_PIPELINE_REPORT.md`  | ColumnTransformer routing, leak prevention             |
+| `BASELINE_MODEL_COMPARISON.md`      | 8-model 5-fold CV comparison                           |
+| `MODEL_EVALUATION_REPORT.md`        | ROC/PR, threshold sweep, confusion matrices            |
+| `HYPERPARAMETER_TUNING_REPORT.md`   | GridSearchCV results for top candidates                |
+| `FEATURE_IMPORTANCE_REPORT.md`      | Multi-view interpretation                              |
+| `VISUALIZATION_REPORT.md`           | Figure manifest & coverage QA                          |
+| `MILESTONE_1_REPORT.md`             | Mid-project milestone summary                          |
+| `FINAL_PROJECT_REPORT.md`           | Consolidated project report                            |
+| `FINAL_TEST_EVALUATION_REPORT.md`   | One-shot test-set evaluation                           |
+| `MODEL_CARD.md`                     | Intended use, limitations, governance                  |
+| `REPRODUCIBILITY_CHECK_REPORT.md`   | End-to-end run order & timings                         |
+| `SUBMISSION_CHECKLIST.md`           | Acceptance gate (11/11 artifacts, 10/10 criteria)      |
 
-This creates the milestone report at `reports/MILESTONE_1_REPORT.md` and the consolidated project report at `reports/FINAL_PROJECT_REPORT.md`.
+### Result tables (`outputs/results/`)
 
-Finalize the model package:
+57 CSVs — every figure has a matching machine-readable table.
 
-```powershell
-python -m src.finalize
-```
+### Figures (`outputs/figures/`)
 
-This fits the locked tuned model, evaluates the held-out test set once, writes final test metrics to `outputs/results/`, creates `reports/MODEL_CARD.md`, and saves the local ignored model artifact at `outputs/models/final_model.joblib`.
+32 × 300 dpi PNGs grouped by `eda_*`, `outliers_*`, `evaluation_*`, `tuning_*`, `interpret_*`, `visualization_*`.
 
-Run the final submission acceptance check:
+### Model artifact
 
-```powershell
-python -m src.acceptance
-```
+`outputs/models/final_model.joblib` — the fitted SVM pipeline with locked threshold (gitignored, regenerated by `python -m src.finalize`).
 
-This verifies required project artifacts and success-criteria evidence, then writes `reports/SUBMISSION_CHECKLIST.md`.
+---
 
-Run tests:
+## Testing
+
+The project ships with a pytest suite covering EDA, outlier detection, preprocessing, modelling, evaluation, tuning, interpretation, plotting, reporting, finalization, acceptance, the notebooks, and `run_all` itself.
 
 ```powershell
 pytest
 ```
+
+Tests run automatically at the end of `python -m src.run_all` (skip with `--skip-tests`).
+
+---
+
+## Reproducibility & Determinism
+
+- Global seed: `src.SEED = 42` (numpy, scikit-learn `random_state`, XGBoost `seed`, splitters).
+- Cleaning is fully deterministic — no randomness, no mutable global state.
+- The 80/20 stratified split is sealed; the test fold is **not touched** until `src.finalize`.
+- `src.acceptance` enforces the presence of every required artifact and verifies every success criterion before declaring the project submittable.
+
+```text
+Submission readiness:  PASSED
+Required artifacts:    11 / 11
+Success criteria:      10 / 10
+Visualization coverage: 17 / 17
+```
+
